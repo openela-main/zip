@@ -1,0 +1,11 @@
+--- ./util.c.old	2025-01-28 14:32:33.064491685 +0100
++++ ./util.c	2025-01-28 14:34:51.331444527 +0100
+@@ -862,7 +862,7 @@
+ 
+             /* remove escape characters */
+             while ((argstart = MBSCHR(argstart, '\\')) != NULL) {
+-                strcpy(argstart, argstart + 1);
++                memmove(argstart, argstart +1, strlen(argstart)+1);
+                 if (*argstart)
+                     ++argstart;
+             }
