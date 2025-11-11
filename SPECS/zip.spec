@@ -1,7 +1,7 @@
 Summary: A file compression and packaging utility compatible with PKZIP
 Name: zip
 Version: 3.0
-Release: 44%{?dist}
+Release: 45%{?dist}
 License: Info-ZIP
 Source: http://downloads.sourceforge.net/infozip/zip30.tar.gz
 URL: http://www.info-zip.org/Zip.html
@@ -20,6 +20,7 @@ Patch7: zip-gnu89-build.patch
 Patch8: buffer_overflow.patch
 Patch9: zip-3.0-configure.patch
 Patch10: sast.patch
+Patch11: zip-3.0-man-strip-extra.patch
 BuildRequires: make
 BuildRequires: bzip2-devel, gcc
 Requires: unzip
@@ -45,6 +46,7 @@ program.
 %patch 8 -p1
 %patch 9 -p1
 %patch 10 -p1
+%patch 11 -p1
 
 %build
 #Remove assembly file to force the c implementation of the crc functions
@@ -75,6 +77,10 @@ mkdir -p $RPM_BULD_ROOT%{_mandir}/man1
 %{_mandir}/man1/zipsplit.1*
 
 %changelog
+* Tue Jul 01 2025 Jakub Martisko <jamartis@redhat.com> - 3.0-45
+- Fix wrongly named option in the manpage
+  Resolves: RHEL-70867
+
 * Tue Jan 28 2025 Jakub Martisko <jamartis@redhat.com> - 3.0-44
 - Fix overlaping strcpy
   Resolves: RHEL-44646
